@@ -1,20 +1,25 @@
-function salvarAlteracoes() {
-    // var nome = document.getElementById("nome").value;
-    var idade = document.getElementById("idade").value;
-    var formacao = document.getElementById("formacao").value;
-    var experiencia = document.getElementById("experiencia").value;
-
-   
-
-    
-    // Fechar o modal após salvar as alterações
-    $('#modalExemplo').modal('hide');
+function selecionarFoto() {
+  var inputFoto = document.getElementById('input-foto');
+  inputFoto.click();
 }
 
 function salvarAlteracoes() {
-    var idade = document.getElementById("idade").value;
-    var formacao = document.getElementById("formacao").value;
-    var experiencia = document.getElementById("experiencia").value;
+  var inputFoto = document.getElementById('input-foto');
+
+  // Verificar se uma foto foi selecionada
+  if (inputFoto.files && inputFoto.files[0]) {
+    var novaImagem = inputFoto.files[0];
+
+    // Salvar a nova imagem localmente (opcional)
+    // Aqui você pode implementar a lógica para salvar a imagem onde desejar
+
+    // Atualizar a foto de perfil com a nova imagem selecionada
+    var fotoPerfil = document.getElementById('foto-perfil');
+    fotoPerfil.src = URL.createObjectURL(novaImagem);
+  }
+    // var idade = document.getElementById("idade").value;
+    // var formacao = document.getElementById("formacao").value;
+    // var experiencia = document.getElementById("experiencia").value;
 
 
     // Por exemplo, você pode exibir uma mensagem no console com os dados alterados:
@@ -25,17 +30,17 @@ function salvarAlteracoes() {
     // console.log("Experiência profissional: " + experiencia);
 
     // Faça algo com os dados inseridos, como enviar para o servidor ou atualizar o perfil na página
-    document.querySelector(".card-text:nth-of-type(1)").innerText = "Idade: " + idade;
-    document.querySelector(".card-text:nth-of-type(2)").innerText = "Formação acadêmica: " + formacao;
-    document.querySelector(".card-text:nth-of-type(3)").innerText = "Experiência profissional: " + experiencia;
+    // document.querySelector(".card-text:nth-of-type(1)").innerText = "Idade: " + idade;
+    // document.querySelector(".card-text:nth-of-type(2)").innerText = "Formação acadêmica: " + formacao;
+    // document.querySelector(".card-text:nth-of-type(3)").innerText = "Experiência profissional: " + experiencia;
 
-    var perfil = {
-      idade: idade,
-      formacao: formacao,
-      experiencia: experiencia
-    };
+    // var perfil = {
+    //   idade: idade,
+    //   formacao: formacao,
+    //   experiencia: experiencia
+    // };
 
-    localStorage.setItem("perfil", JSON.stringify(perfil));
+    // localStorage.setItem("perfil", JSON.stringify(perfil));
 
     // Fechar o modal
     $('#modalExemplo').modal('hide');
@@ -220,6 +225,21 @@ botoesEdicao.forEach(function(botao) {
     itemLista.innerHTML = "";
     itemLista.appendChild(campoEdicao);
   });
+});
+
+document.getElementById("btn-selecionar-foto").addEventListener("click", function() {
+  document.getElementById("input-foto").click();
+});
+
+document.getElementById("input-foto").addEventListener("change", function(event) {
+  var arquivo = event.target.files[0];
+  var leitor = new FileReader();
+
+  leitor.onload = function(e) {
+    document.getElementById("foto-perfil").src = e.target.result;
+  };
+
+  leitor.readAsDataURL(arquivo);
 });
 
 

@@ -1,0 +1,13 @@
+#btn-selecionar-foto {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #foto-perfil {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
